@@ -1,0 +1,21 @@
+<div ng-cloak>
+  <md-content class="md-padding" layout="row" layout-wrap layout-align="left start" layout-xs="column">
+    <div flex="25" flex-sm="100" flex-xs="100" layout="column" data-ng-repeat = "item in widgets.displayData">
+      <md-card>
+        <md-card-title>
+          <md-card-title-text>
+            <span class="md-headline">{{item.title}}</span>
+            <span class="md-subhead">{{item.description}}</span>
+          </md-card-title-text>
+          <md-card-title-media>
+            <div class="md-media-sm card-media"></div>
+          </md-card-title-media>
+        </md-card-title>
+        <md-card-actions layout="row" layout-align="end center">
+          <md-button>Action 1</md-button>
+          <md-button>Action 2</md-button>
+        </md-card-actions>
+      </md-card>
+    </div>
+  </md-content>
+</div>

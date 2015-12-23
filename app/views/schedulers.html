@@ -1,0 +1,63 @@
+
+<md-content layout="row" layout-wrap layout-align="left start" layout-xs="column">
+  <div flex="75" layout="column" layout-padding layout-margin>
+    <div ui-calendar="uiConfig.calendar" class="span8 calendar" ng-model="eventSources"></div> 
+  </div>
+  <div flex="20" layout="column" layout-margin >
+  <md-toolbar md-scroll-shrink ng-if="true" class="app-header" style="min-height:10%;margin-bottom:0;z-index:1">
+    <div class="md-toolbar-tools select-campaign">
+      <h3 flex="90" data-ng-show='!searchCampaign'>
+        <span>Select Channel</span>
+      </h3>
+    </div>
+  </md-toolbar>
+  <md-grid-list style="margin-top:0px;width:100%;"
+        md-cols-sm="1" md-cols-md="2" md-cols-gt-md="6"
+        md-row-height-gt-md="1:1" md-row-height="2:2"
+         >
+    <md-grid-tile class="gray" style="background-color:rgb(202, 202, 255);"
+        md-rowspan="4" md-colspan="4" md-colspan-sm="1">
+        Channel 1
+    </md-grid-tile>
+    <md-grid-tile class="gray" style="background-color:#6EF5AA;"
+        md-rowspan="2" md-colspan="2" md-colspan-sm="1">
+        Channel 2
+    </md-grid-tile>
+    <md-grid-tile class="gray" style="background-color:#C19B61;"
+        md-rowspan="2" md-colspan="2" md-colspan-sm="1">
+        Channel 3
+    </md-grid-tile>
+    <md-grid-tile class="gray" style="background-color:#EFEFEF;"
+        md-rowspan="1" md-colspan="6" md-colspan-sm="1">
+        Channel 3
+    </md-grid-tile>
+  </md-grid-list>
+
+    <md-toolbar md-scroll-shrink ng-if="true" class="app-header" style="min-height:10%;margin-bottom:0;z-index:1;">
+    <div class="md-toolbar-tools select-campaign">
+      <h3 flex="90" data-ng-show='!searchCampaign'>
+        <span>Select Campaign</span>
+      </h3>
+      <md-input-container flex="90" md-no-float class="md-block" data-ng-show='searchCampaign'>
+        <input ng-model="user.address2" placeholder="Address 2">
+      </md-input-container>
+      <span flex="10" data-ng-click="searchList()"><i class="fa fa-search fa-lg"></i></span>
+    </div>
+  </md-toolbar>
+  <md-content flex class="list-campaign">
+    <md-list>
+      <md-list-item class="md-3-line" ng-repeat="item in todos">
+        <img ng-src="{{item.face}}" alt="{{item.who}}" class="md-avatar">
+        <div class="md-list-item-text" data-ng-click="addEvent()">
+          <h3>{{item.what}}</h3>
+          <h4>{{item.who}}</h4>
+          <p>
+            {{item.notes}}
+          </p>
+        </div>
+        <md-divider inset></md-divider>
+      </md-list-item>
+    </md-list>
+  </md-content>
+  </div>
+</md-content>

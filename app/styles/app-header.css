@@ -1,0 +1,61 @@
+[scroll] {
+  position:fixed;
+  top:0;
+}
+
+.md-tools {
+  width: 40px;
+}
+
+.muted {
+color: #bbb;
+font-size: inherit;
+font-weight: 700;
+text-align: left;
+}
+
+.md-tile-left {
+  margin-right:0!important;
+  padding-left:24px;
+  color: rgb(63,81,181);
+}
+.md-toolbar-tools + .md-subheader{
+  display:none;
+}
+
+.app-header {
+  background-color: #5484E6 !important;
+  z-index: 10;
+}
+
+.app-title {
+  color: #fff;
+  font-size: 34px;
+  width: 20%;
+  margin-left: 2%;
+}
+
+.main-menu.active {
+  background-color: #3667CE;
+  border-bottom : 3px solid #000;
+  border-radius: 0px ;
+  margin: 0px;
+}
+
+.app-breadcrumb {
+  margin-bottom: 0px;
+  font-size: 14px;
+  padding: 5px 45px;
+  border-radius: 0px;
+  line-height: 30px;
+} 
+
+
+
+.btn-new {
+  float: right;
+  min-height: 30px;
+  line-height: 20px;
+  margin: 0px;
+  background-color: #2CCC70;
+}
