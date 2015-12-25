@@ -1,10 +1,117 @@
-app.controller('SchedulerCtrl',
-   function($scope, $compile, $timeout, uiCalendarConfig) {
-     var date = new Date();
-    var d = date.getDate();
-    var m = date.getMonth();
-    var y = date.getFullYear();
+app.controller('SchedulerCtrl', ['$scope', '$rootScope','$http','$compile', '$timeout', 'uiCalendarConfig','schedulerServices','$mdDialog', '$mdMedia', function ($scope, $rootScope, $http, $compile, $timeout, uiCalendarConfig,schedulerServices,$mdDialog, $mdMedia) {
+   
+   setTimeout(function(){
+    $('.fc-today-button').click();
+  },1)
+    // page is now ready, initialize the calendar...
+    var request = $http.get('http://52.90.114.255:3000/schedular/list').then(function (response) {
+        $scope.data = response; 
+        return response; // this will be `data` in the next chained .then() functions
+    });
 
+
+$scope.getList = function () {
+  request.then(function (response){
+  $rootScope.events = [];
+        var data = response.data;
+        for(var i=25; i<data.length;i++) {
+          var obj = {};
+          if(data[i].start_time !== undefined || data[i].end_time !== undefined){
+          obj.start = data[i].start_time;
+            obj.end = data[i].end_time;
+            $rootScope.events.push(obj);
+            }
+        }
+      })
+}
+$scope.getList();
+
+function DialogController($scope, $mdDialog) {
+  $scope.hide = function() {
+    $mdDialog.hide();
+  };
+  $scope.cancel = function() {
+    $mdDialog.cancel();
+  };
+  $scope.answer = function(answer) {
+    $mdDialog.hide(answer);
+  };
+}
+
+$scope.addEvent = function(ev) {
+  var useFullScreen = ($mdMedia('sm') || $mdMedia('xs'))  && $scope.customFullscreen;
+    $mdDialog.show({
+      controller: DialogController,
+      templateUrl: 'views/add.schedule.html',
+      parent: angular.element(document.body),
+      targetEvent: ev,
+      clickOutsideToClose:true,
+      fullscreen: useFullScreen
+    })
+    .then(function(answer) {
+      $scope.status = 'You said the information was "' + answer + '".';
+    }, function() {
+      $scope.status = 'You cancelled the dialog.';
+    });
+    $scope.$watch(function() {
+      return $mdMedia('xs') || $mdMedia('sm');
+    }, function(wantsFullScreen) {
+      $scope.customFullscreen = (wantsFullScreen === true);
+    });
+
+  var start = moment().add(30, 'minutes')._d;
+  var end = moment().add(90, 'minutes')._d;
+  console.log(start);
+  console.log(end);
+  $scope.saveObj = {
+        "user_id": "45345345hjk345hkj3h4j5h3k45345",
+        "playlist_id": "1",
+        "assets_count": "30",
+        "video_duration": "2:30:00",
+        "start_time": start,
+        "end_time": end,
+        "week_days": [0, 1, 2, 3, 4, 5, 6],
+        "all_days": "yes"
+      }
+      schedulerServices.saveSchedule($scope.saveObj).then(function () {
+        confirm('success');
+        //window.location.reload(true);
+        location.reload(); 
+      }, function () {
+                alert('failure');
+              });
+      
+/*$http.post('http://52.90.114.255:3000/schedular/save',$scope.addEvent).success(function(data, status) {
+            alert('saved successfully');
+        }, function (){
+          alert('Failure');
+        })*/
+}
+$(document).ready(function() {
+$('#calendar').fullCalendar({
+        // put your options and callbacks here
+        defaultView:'agendaDay', 
+        defaultDate: new Date(), 
+         slotDuration: '00:01:00',
+         header:{
+          left: 'prev,next today',
+          center: 'title',
+          right: 'month,agendaWeek,agendaDay'
+        },
+        timezone: 'local',
+        selectable: true, 
+        selectConstraint:{
+          start: '00:01', // a start time (10am in this example)
+          end: '23:59', // an end time (6pm in this example)
+        }, 
+        eventConstraint:{
+          start: '00:00', // a start time (10am in this example)
+          end: '24:00', // an end time (6pm in this example)
+        }, 
+        editable:true, 
+        events: $rootScope.events
+    })
+})
 
 $scope.title = 'My App Title';
     var imagePath = 'img/list/60.jpeg';
@@ -18,135 +125,8 @@ $scope.title = 'My App Title';
     });
   }
 
-  
-
-  $scope.searchCampaign = false;
-
-$scope.searchList = function() {
-  $scope.searchCampaign = true;
-}
     
-    $scope.changeTo = 'Hungarian';
-    /* event source that pulls from google.com */
-    $scope.eventSource = {
-            url: "http://www.google.com/calendar/feeds/usa__en%40holiday.calendar.google.com/public/basic",
-            className: 'gcal-event',           // an option!
-            currentTimezone: 'America/Chicago' // an option!
-    };
-    /* event source that contains custom events on the scope */
-    $scope.events = [
-      {title: 'All Day Event',start: new Date(y, m, 1)},
-      {title: 'Long Event',start: new Date(y, m, d - 5),end: new Date(y, m, d - 2)},
-      {id: 999,title: 'Repeating Event',start: new Date(y, m, d - 3, 16, 0),allDay: false},
-      {id: 999,title: 'Repeating Event',start: new Date(y, m, d + 4, 16, 0),allDay: false},
-      {title: 'Birthday Party',start: new Date(y, m, d + 1, 19, 0),end: new Date(y, m, d + 1, 22, 30),allDay: false},
-      {title: 'Click for Google',start: new Date(y, m, 28),end: new Date(y, m, 29),url: 'http://google.com/'}
-    ];
-    /* event source that calls a function on every view switch */
-    $scope.eventsF = function (start, end, timezone, callback) {
-      var s = new Date(start).getTime() / 1000;
-      var e = new Date(end).getTime() / 1000;
-      var m = new Date(start).getMonth();
-      var events = [{title: 'Feed Me ' + m,start: s + (50000),end: s + (100000),allDay: false, className: ['customFeed']}];
-      callback(events);
-    };
 
-    $scope.calEventsExt = {
-       color: '#f00',
-       textColor: 'yellow',
-       events: [ 
-          {type:'party',title: 'Lunch',start: new Date(y, m, d, 12, 0),end: new Date(y, m, d, 14, 0),allDay: false},
-          {type:'party',title: 'Lunch 2',start: new Date(y, m, d, 12, 0),end: new Date(y, m, d, 14, 0),allDay: false},
-          {type:'party',title: 'Click for Google',start: new Date(y, m, 28),end: new Date(y, m, 29),url: 'http://google.com/'}
-        ]
-    };
-    /* alert on eventClick */
-    $scope.alertOnEventClick = function( date, jsEvent, view){
-        $scope.alertMessage = (date.title + ' was clicked ');
-    };
-    /* alert on Drop */
-     $scope.alertOnDrop = function(event, delta, revertFunc, jsEvent, ui, view){
-       $scope.alertMessage = ('Event Droped to make dayDelta ' + delta);
-    };
-    /* alert on Resize */
-    $scope.alertOnResize = function(event, delta, revertFunc, jsEvent, ui, view ){
-       $scope.alertMessage = ('Event Resized to make dayDelta ' + delta);
-    };
-    /* add and removes an event source of choice */
-    $scope.addRemoveEventSource = function(sources,source) {
-      var canAdd = 0;
-      angular.forEach(sources,function(value, key){
-        if(sources[key] === source){
-          sources.splice(key,1);
-          canAdd = 1;
-        }
-      });
-      if(canAdd === 0){
-        sources.push(source);
-      }
-    };
-    /* add custom event*/
-    $scope.addEvent = function() {
-      alert('clicked');
-      $scope.events.push({
-        title: 'Open Sesame',
-        start: new Date(y, m, 23),
-        end: new Date(y, m, 24),
-        className: ['openSesame']
-      });
-    };
-    /* remove event */
-    $scope.remove = function(index) {
-      $scope.events.splice(index,1);
-    };
-    /* Change View */
-    $scope.changeView = function(view,calendar) {
-      uiCalendarConfig.calendars[calendar].fullCalendar('changeView',view);
-    };
-    /* Change View */
-    $scope.renderCalender = function(calendar) {
-      if(uiCalendarConfig.calendars[calendar]){
-        uiCalendarConfig.calendars[calendar].fullCalendar('render');
-      }
-    };
-     /* Render Tooltip */
-    $scope.eventRender = function( event, element, view ) { 
-        element.attr({'tooltip': event.title,
-                     'tooltip-append-to-body': true});
-        $compile(element)($scope);
-    };
-    /* config object */
-    $scope.uiConfig = {
-      calendar:{
-        height: 550,
-        editable: true,
-        slotDuration: '00:01:00',
-        defaultView: 'agendaDay',
-        header:{
-          left: 'prev,next today',
-          center: 'title',
-          right: 'month,agendaWeek,agendaDay'
-        },
-        eventClick: $scope.alertOnEventClick,
-        eventDrop: $scope.alertOnDrop,
-        eventResize: $scope.alertOnResize,
-        eventRender: $scope.eventRender
-      }
-    };
+}]);
 
-    $scope.changeLang = function() {
-      if($scope.changeTo === 'Hungarian'){
-        $scope.uiConfig.calendar.dayNames = ["Vasárnap", "Hétfő", "Kedd", "Szerda", "Csütörtök", "Péntek", "Szombat"];
-        $scope.uiConfig.calendar.dayNamesShort = ["Vas", "Hét", "Kedd", "Sze", "Csüt", "Pén", "Szo"];
-        $scope.changeTo= 'English';
-      } else {
-        $scope.uiConfig.calendar.dayNames = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
-        $scope.uiConfig.calendar.dayNamesShort = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
-        $scope.changeTo = 'Hungarian';
-      }
-    };
-    /* event sources array*/
-    $scope.eventSources = [$scope.events, $scope.eventSource, $scope.eventsF];
-    $scope.eventSources2 = [$scope.calEventsExt, $scope.eventsF, $scope.events];
 
-});

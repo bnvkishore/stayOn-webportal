@@ -1,7 +1,7 @@
 
 <md-content layout="row" layout-wrap layout-align="left start" layout-xs="column">
   <div flex="75" layout="column" layout-padding layout-margin>
-    <div ui-calendar="uiConfig.calendar" class="span8 calendar" ng-model="eventSources"></div> 
+    <div id='calendar'></div> 
   </div>
   <div flex="20" layout="column" layout-margin >
   <md-toolbar md-scroll-shrink ng-if="true" class="app-header" style="min-height:10%;margin-bottom:0;z-index:1">
@@ -48,7 +48,7 @@
     <md-list>
       <md-list-item class="md-3-line" ng-repeat="item in todos">
         <img ng-src="{{item.face}}" alt="{{item.who}}" class="md-avatar">
-        <div class="md-list-item-text" data-ng-click="addEvent()">
+        <div class="md-list-item-text" data-ng-click="addEvent($event)">
           <h3>{{item.what}}</h3>
           <h4>{{item.who}}</h4>
           <p>
@@ -61,3 +61,7 @@
   </md-content>
   </div>
 </md-content>
+
+
+
+  

@@ -84,13 +84,44 @@ body {
     border-bottom: 0;
   }
 }
-.main-content {
+/*.main-content {
   margin-top : 7%;
-}
-
+}*/
+.del-iocn{
+    padding:3px 0px 5px 23px;
+    font-size: 20px;
+  }
+  
 .carddemoBasicUsage .card-media {
   background-color: #999999; }
 
+ .custom-circle{
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: green;
+    position: relative;
+    top: 7px;
+  }
+  .custom-dot{
+    font-size: 8px;color: #4A9DCE;margin: 1px;
+  }
+  .custom-buttton{
+    border-radius: 20px;
+    background: #F9F8F8;
+    border: 1px solid #afafaf;
+    margin-left: 20px !important;;
+    padding: 0px;
+    min-height: 26px !important;
+    line-height: 26px;
+    font-size: 12px;
+    font-weight: 700;
+    color: #6B6969;
+    }
+
+ .remove-height .md-errors-spacer{
+  min-height: 0px;
+}
 
 /* Schedulers CSS */
 

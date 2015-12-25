@@ -1,20 +1,57 @@
-<div ng-cloak>
+
+ <div ng-cloak style="height:100%;">
+ 
+
   <md-content class="md-padding" layout="row" layout-wrap layout-align="left start" layout-xs="column">
-    <div flex="25" flex-sm="100" flex-xs="100" layout="column" data-ng-repeat = "item in widgets.displayData">
+  <div flex="100" layout="row" style-"height:100%;" layout-align="end start">
+   <md-input-container md-no-float class="md-block remove-height" style="padding-left:20px;">
+            <md-icon md-font-icon="fa fa-search" style="padding-top: 5px;"></md-icon>
+            <input ng-model="widgets.state" placeholder="Address 2">
+    </md-input-container>
+   <md-input-container>
+          <md-select ng-model="widgets.userState" placeholder="Sort By" class="custom-select" style="margin-left: 25px;margin-right: 10px;">
+            <md-option ng-repeat="state in widgets.states" value="{{state.abbrev}}">
+              {{state.abbrev}}
+            </md-option>
+          </md-select>
+    </md-input-container>
+  </div>
+    <div flex="20" flex-sm="100" flex-xs="100" layout="column" data-ng-repeat = "item in widgets.displayData">
       <md-card>
-        <md-card-title>
-          <md-card-title-text>
-            <span class="md-headline">{{item.title}}</span>
-            <span class="md-subhead">{{item.description}}</span>
-          </md-card-title-text>
-          <md-card-title-media>
-            <div class="md-media-sm card-media"></div>
-          </md-card-title-media>
+      <img src="images/layout_1.png" class="md-card-image" alt="image caption">
+        <md-card-title style="padding-top: 13px;padding-bottom: 0px;">
+            <span class="custom-circle"></span>
+            <span class="md-subhead" style="margin-left:9px;color: #4A9DCE;font-size: 18px;overflow: hidden; white-space: nowrap;text-overflow: ellipsis;">{{item.title}}</span>
         </md-card-title>
-        <md-card-actions layout="row" layout-align="end center">
-          <md-button>Action 1</md-button>
-          <md-button>Action 2</md-button>
+        <md-card-actions layout="row" layout-align="start center">
+          <md-button class="custom-buttton">Action 1</md-button>
         </md-card-actions>
+        <div layout="row" style="border-top:1px solid #E6E6E6;margin-top:5px;">
+          <div flex="40" style="text-align:center;display:inline;border-right: 1px solid #E6E6E6;padding-top: 8px;">
+            <i class="fa fa-eye"></i>
+            <span>232</span>
+          </div>
+          <div flex="40" style="text-align:center;display:inline;border-right: 1px solid #E6E6E6;padding-top: 8px;">
+            <i class="fa fa-check-circle-o"></i>
+            <span>232 hrs</span>
+          </div>
+          <md-menu flex="20" style="text-align:center;display:inline;padding-top: 6px;" md-position-mode="target-right target"  md-offset="0 -210">
+           <!-- Trigger element is a md-button with an icon -->
+           <div  ng-click="$mdOpenMenu($event)">
+            <i class="fa fa-circle custom-dot"></i><i class="fa fa-circle custom-dot"></i><i class="fa fa-circle custom-dot"></i>
+          </div>
+           <!-- <md-button ng-click="$mdOpenMenu($event)" class="md-icon-button" aria-label="Open sample menu">
+             <md-icon md-svg-icon="call:phone"></md-icon>
+           </md-button> -->
+           <md-menu-content >
+             <md-menu-item><md-button ng-click="doSomething()">Edit</md-button></md-menu-item>
+             <md-menu-item><md-button ng-click="doSomething()">Delete</md-button></md-menu-item>
+             <md-menu-item><md-button ng-click="doSomething()">Clear Cache</md-button></md-menu-item>
+             <md-menu-item><md-button ng-click="doSomething()">History</md-button></md-menu-item>
+           </md-menu-content>
+          </md-menu>
+          
+        </div>
       </md-card>
     </div>
   </md-content>

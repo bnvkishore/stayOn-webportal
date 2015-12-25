@@ -1,0 +1,210 @@
+<md-dialog flex="60" style="max-height:80%;" ng-cloak>
+    <form>
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                <h2>Schedule Campaign</h2>
+                <!-- <md-datepicker ng-model="myDate" md-placeholder="Enter date"></md-datepicker> -->
+                <span flex></span>
+                <md-icon class="fa fa-times"  ng-click="cancel()" class="del-icon"></md-icon>
+            </div>
+        </md-toolbar>
+        <md-dialog-content>
+        <div class="md-dialog-content" style="margin-bottom: 20px;">
+            
+            <div layout="row">
+                <div flex="20">
+                    <img src="images/layout_1.png" style="width:100px;height:100px;"></img>
+                </div>
+                <div flex="80">
+                    <p>Voluptatem Accus</p>
+                    <div>
+                         <md-icon class="fa fa-picture-o"></md-icon>
+                         <span>Res. 1920x1080</span>
+                    </div>
+                    <div>
+                         <md-icon class="fa fa-clock-o"></md-icon>
+                          <span>16 September 2015</span>
+                    </div>
+                </div>
+            </div>
+            <div layout="row" style="height:40px">
+                <div flex="25" style="margin-top:4%">
+                    All day
+                </div>
+                <div flex="10" ng-cloak>
+                    <md-switch aria-label="Switch 1">
+                    </md-switch>
+                </div>
+                <div flex="40">
+                        <div class="container">
+                        <div class="row">
+                            <div class='col-sm-6'>
+                                <div class="form-group" datetimez ng-model="var1">
+                                    <div class='input-group date datetimepicker'>
+                                        <input type='text' class="form-control" />
+                                        <span class="input-group-addon">
+                                            <span class="glyphicon glyphicon-calendar"></span>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                           
+                        </div>
+                    </div>
+                  <!--   <md-input-container class="md-block" md-no-float id="datetimepicker4">
+                        <input data-format="yyyy-MM-dd" type="text" ng-model="currentDate" placeholder="DD/MM/YYYY">
+                        <md-icon class="icon-margin-right" md-font-icon="fa fa-calendar"></md-icon>
+                    </md-input-container> -->
+                </div>
+            </div>
+            <div layout="row" style="height:40px">
+                <div flex style="margin-top:4%">
+                    Start Time
+                </div>
+                <div flex="40">
+                    <md-input-container class="md-block" md-no-float>
+                        <input placeholder="DD/MM/YYYY">
+                        <md-icon class="icon-margin-right" md-font-icon="fa fa-calendar"></md-icon>
+                    </md-input-container>
+                </div>
+                <div flex="40">
+                    <md-input-container class="md-block" md-no-float>
+                        <input placeholder="DD/MM/YYYY">
+                        <md-icon class="icon-margin-right" md-font-icon="fa fa-clock-o"></md-icon>
+                    </md-input-container>
+                </div>
+            </div>
+            <div layout="row" style="height:40px">
+                <div flex style="margin-top:4%">
+                    End Time
+                </div>
+                <div flex="40">
+                    <md-input-container class="md-block" md-no-float>
+                        <input placeholder="DD/MM/YYYY">
+                        <md-icon class="icon-margin-right" md-font-icon="fa fa-calendar"></md-icon>
+                    </md-input-container>
+                </div>
+                <div flex="40">
+                    <md-input-container class="md-block" md-no-float>
+                        <input placeholder="DD/MM/YYYY">
+                        <md-icon class="icon-margin-right" md-font-icon="fa fa-clock-o"></md-icon>
+                    </md-input-container>
+                </div>
+            </div>
+            <div layout="row" style="height:40px">
+                <div flex style="margin-top:4%">
+                    Days
+                </div>
+                <div flex="80" style="margin-top:4%">
+                    <div class="ck-button" flex>
+                        <label>
+                            <input type="checkbox" value="1"><span>Sun</span>
+                        </label>
+                    </div>
+                    <div class="ck-button" flex>
+                        <label>
+                            <input type="checkbox" value="2"><span>Mon</span>
+                        </label>
+                    </div>
+                    <div class="ck-button" flex>
+                        <label>
+                            <input type="checkbox" value="3"><span>Tue</span>
+                        </label>
+                    </div>
+                    <div class="ck-button" flex>
+                        <label>
+                            <input type="checkbox" value="4"><span>Wed</span>
+                        </label>
+                    </div>
+                    <div class="ck-button" flex>
+                        <label>
+                            <input type="checkbox" value="5"><span>Thu</span>
+                        </label>
+                    </div>
+                    <div class="ck-button" flex>
+                        <label>
+                            <input type="checkbox" value="6"><span>Fri</span>
+                        </label>
+                    </div>
+                    <div class="ck-button" flex>
+                        <label>
+                            <input type="checkbox" value="7"><span>Sat</span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <script type="text/ng-template" id="/modal.datepicker.html">
+                <md-dialog aria-label="" class="md-datepicker" ng-class="{ 'portrait': !$mdMedia('gt-md') }">
+                    <md-dialog-content layout="row" layout-wrap>
+                        <div layout="column" layout-align="start center">
+                            <md-toolbar layout-align="center center" class="md-datepicker-dow md-primary"><span>{{ datepicker.currentMoment.format("dddd") }}</span></md-toolbar>
+                            <md-toolbar layout-align="center center" class="md-datepicker-date md-hue-1 md-primary" layout="column">
+                                <div class="md-datepicker-month">{{ datepicker.currentMoment.format("MMM") }}</div>
+                                <div class="md-datepicker-day">{{ datepicker.currentMoment.format("DD") }}</div>
+                                <md-select class="md-datepicker-year" placeholder="{{ datepicker.currentMoment.format('YYYY') }}" ng-model="year" ng-change="datepicker.setYear()">
+                                    <md-option ng-value="year" ng-repeat="year in yearsOptions">{{ year }}</md-option>
+                                </md-select>
+                            </md-toolbar>
+                        </div>
+                        <div layout="column" layout-align="start center" class="md-datepicker-calendar">
+                            <div layout="row" layout-align="space-between center" class="md-datepicker-monthyear">
+                                <md-button aria-label="mese precedente" class="md-icon-button" ng-click="datepicker.prevMonth()">
+                                    <md-icon md-svg-src="http://upload.wikimedia.org/wikipedia/commons/a/a4/Ic_chevron_left_36px.svg"></md-icon>
+                                </md-button>
+                                {{ datepicker.currentMoment.format("MMMM YYYY") }}
+                                <md-button aria-label="mese successivo" class="md-icon-button" ng-click="datepicker.nextMonth()">
+                                    <md-icon md-svg-src="http://upload.wikimedia.org/wikipedia/commons/8/8d/Ic_chevron_right_36px.svg"></md-icon>
+                                </md-button>
+                            </div>
+                            <div layout="row" layout-align="space-around center" class="md-datepicker-week-days">
+                                <div layout layout-align="center center" ng-repeat="d in datepicker.weekDays track by $index">{{ d }}</div>
+                            </div>
+                            <div layout="row" layout-wrap class="md-datepicker-days">
+                                <div layout layout-align="center center" ng-repeat-start="n in datepicker.getDaysInMonth() track by $index">
+                                    <md-button aria-label="seleziona giorno" ng-if="n !== false" ng-class="{'md-accent': datepicker.currentMoment.date() == n}" ng-click="datepicker.selectDate(n)">{{ n }}</md-button>
+                                </div>
+                                <div flex ng-if="($index + 1) % 7 == 0" ng-repeat-end></div>
+                            </div>
+                        </div>
+                    </md-dialog-content>
+                    <div class="md-actions" layout="row">
+                        <md-button ng-click="datepicker.cancel()" aria-label="annulla">Cancel</md-button>
+                        <md-button ng-click="datepicker.confirm()" aria-label="ok">OK</md-button>
+                    </div>
+                </md-dialog>
+            </script>
+        </div>
+        </md-dialog-content>
+        <!-- <md-dialog-actions layout="row">
+            <md-button href="http://en.wikipedia.org/wiki/Mango" target="_blank" md-autofocus>
+                More on Wikipedia
+            </md-button>
+            <span flex></span>
+            <md-button ng-click="answer('not useful')">
+                Not Useful
+            </md-button>
+            <md-button ng-click="answer('useful')" style="margin-right:20px;">
+                Useful
+            </md-button>
+        </md-dialog-actions> -->
+    </form>
+    <md-footer style="background-color:#ccc">
+        <div layout="row" layout-align="start center">
+            <div flex="60">
+                <!-- <md-button ng-click="cancel()"> -->
+                    <md-icon ng-click="cancel()" class="fa fa-trash del-iocn"></md-icon>
+                <!-- </md-button> -->
+            </div>
+            <div flex="20">
+                <md-button ng-click="cancel()">
+                    Cancel
+                </md-button>
+            </div>
+            <div flex="20">
+                <md-button ng-click="schedule()">
+                    Schedule
+                </md-button>
+            </div>
+        </div>
+    </md-footer>
+</md-dialog>

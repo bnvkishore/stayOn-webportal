@@ -42,4 +42,12 @@ angular.module('mainApp')
     	Description: 'sample descripton'
     }
     ]
+
+    vm.state="sort by";
+     vm.states=[{
+         abbrev:"ascending"
+     },{
+         abbrev:"descending"
+     }]
+     
   });
