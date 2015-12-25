@@ -87,7 +87,7 @@ $scope.addEvent = function(ev) {
           alert('Failure');
         })*/
 }
-$(document).ready(function() {
+
 $('#calendar').fullCalendar({
         // put your options and callbacks here
         defaultView:'agendaDay', 
@@ -111,7 +111,6 @@ $('#calendar').fullCalendar({
         editable:true, 
         events: $rootScope.events
     })
-})
 
 $scope.title = 'My App Title';
     var imagePath = 'img/list/60.jpeg';

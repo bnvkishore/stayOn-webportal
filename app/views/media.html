@@ -16,12 +16,12 @@
           </md-select>
     </md-input-container>
   </div>
-    <div flex="20" flex-sm="100" flex-xs="100" layout="column" data-ng-repeat = "item in media.displayData">
+    <div flex="20" flex-sm="100" flex-xs="100" layout="column" data-ng-repeat = "item in media.mediaData">
       <md-card>
       <img src="images/layout_1.png" class="md-card-image" alt="image caption">
         <md-card-title style="padding-top: 13px;padding-bottom: 0px;">
             <span class="custom-circle"></span>
-            <span class="md-subhead" style="margin-left:9px;color: #4A9DCE;font-size: 18px;overflow: hidden; white-space: nowrap;text-overflow: ellipsis;">{{item.title}}</span>
+            <span class="md-subhead" style="margin-left:9px;color: #4A9DCE;font-size: 18px;overflow: hidden; white-space: nowrap;text-overflow: ellipsis;">{{item.org_filename}}</span>
         </md-card-title>
         <md-card-actions layout="row" layout-align="start center">
           <md-button class="custom-buttton">Action 1</md-button>

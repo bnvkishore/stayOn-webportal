@@ -30,32 +30,7 @@ var request = $http.get('http://52.90.114.255:3000/playlist/list/playlist').then
             $rootScope.events.push(obj);
         }*/
       })
-    /*vm.displayData = [
-    {
-        title: 'Campaigns Card one',
-        Description: 'sample descripton'
-    },
-    {
-        title: 'Campaigns Card two',
-        Description: 'sample descripton'
-    },
-    {
-        title: 'Campaigns Card three',
-        Description: 'sample descripton'
-    },
-    {
-        title: 'Campaigns Card four',
-        Description: 'sample descripton'
-    },
-    {
-        title: 'Campaigns Card five',
-        Description: 'sample descripton'
-    },
-    {
-        title: 'Campaigns Card six',
-        Description: 'sample descripton'
-    }
-    ]*/
+    
 
     vm.state="sort by";
      vm.states=[{
