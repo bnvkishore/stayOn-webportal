@@ -1,0 +1,31 @@
+<md-dialog aria-label="New Display" flex="50" style="max-height:90%;" ng-cloak>
+    <form>
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                <h2>New Media</h2>
+                <!-- <md-datepicker ng-model="myDate" md-placeholder="Enter date"></md-datepicker> -->
+                <span flex></span>
+                <md-icon class="fa fa-times" ng-click="cancel()" class="del-icon"></md-icon>
+            </div>
+        </md-toolbar>
+        <md-dialog-content layout-margin>
+            <div class="md-dialog-content">
+                <input type="file" file-model="myFile" style="display:inline-block;"/>
+                <button ng-click="uploadFile()">Upload File</button>
+            </div>
+        </md-dialog-content>
+    </form>
+    <md-footer style="background-color:#ccc" class="md-medium-tall">
+        <div layout="row" layout-align="end center">
+            <!--  <div flex="60">
+                <md-button ng-click="cancel()">
+                    <md-icon md-font-icon="fa fa-delete" aria-label="Close dialog"></md-icon>
+                </md-button>
+            </div> -->
+                <!-- <span flex></span> -->
+                <md-button ng-click="cancel()">
+                    Cancel
+                </md-button>
+        </div>
+    </md-footer>
+</md-dialog>

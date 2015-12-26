@@ -90,7 +90,7 @@ $scope.addEvent = function(ev) {
 
 $('#calendar').fullCalendar({
         // put your options and callbacks here
-        defaultView:'agendaDay', 
+        defaultView:'month', 
         defaultDate: new Date(), 
          slotDuration: '00:01:00',
          header:{

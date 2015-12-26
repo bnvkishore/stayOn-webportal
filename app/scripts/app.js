@@ -51,71 +51,111 @@ var app = angular
       });
   });
   app.controller('Menuctrl', function ($scope, $location, $mdMedia, $mdDialog) {
-    this.awesomeThings = [
-      'HTML5 Boilerplate',
-      'AngularJS',
-      'Karma'
-    ];
-
     angular.element('.main-menu').click(function () {
     angular.element('.main-menu').removeClass('active');
     angular.element(this).addClass('active');
   });
 
-  $scope.newEvent = function(ev){
-      //code for popup arrival on new button
-      console.log($scope.items);
-      var useFullScreen = ($mdMedia('xs'))  && $scope.customFullscreen;
-    $mdDialog.show({
-      controller: DialogController,
-      templateUrl: 'views/newDisplay.html',
-      parent: angular.element(document.body),
-      targetEvent: ev,
-      clickOutsideToClose:true,
-      fullscreen: useFullScreen,
-      locals: {
-           items: $scope.items
-      }
-    })
-    .then(function(answer) {
-      $scope.status = 'You said the information was "' + answer + '".';
-    }, function() {
-      $scope.status = 'You cancelled the dialog.';
-    });
-    $scope.$watch(function() {
-      return $mdMedia('xs');
-    }, function(wantsFullScreen) {
-      $scope.customFullscreen = (wantsFullScreen === true);
-    });
-     function DialogController($scope, $mdDialog) {
-      $scope.items = [{
-      imgNum:1
-    },{
-      imgNum:2
-    },{
-      imgNum:3
-    },{
-      imgNum:4
-    },{
-      imgNum:5
-    }];
-    $scope.states=[{
-         abbrev:"landscape"
-     },{
-         abbrev:"portrait"
-     }];
-      console.log($scope.items);
-         $scope.hide = function() {
-          $mdDialog.hide();
-        };
-        $scope.cancel = function() {
-          $mdDialog.cancel();
-        };
-        $scope.answer = function(answer) {
-          $mdDialog.hide(answer);
-        };
-      }
- };
+  $scope.newEvent = function(ev) {
+        //code for popup arrival on new button
+        // console.log($scope.items);
+        var useFullScreen = ($mdMedia('xs')) && $scope.customFullscreen;
+        if ($scope.state == "display") {
+            $mdDialog.show({
+                controller: DialogController,
+                templateUrl: 'views/newEvent.html',
+                parent: angular.element(document.body),
+                targetEvent: ev,
+                clickOutsideToClose: true,
+                fullscreen: useFullScreen,
+            });
+            $scope.$watch(function() {
+                return $mdMedia('xs');
+            }, function(wantsFullScreen) {
+                $scope.customFullscreen = (wantsFullScreen === true);
+            });
+
+            function DialogController($scope, $mdDialog) {
+                $scope.items = [{
+                    imgNum: 1
+                }, {
+                    imgNum: 2
+                }, {
+                    imgNum: 3
+                }, {
+                    imgNum: 4
+                }, {
+                    imgNum: 5
+                }];
+                $scope.states = [{
+                    abbrev: "landscape"
+                }, {
+                    abbrev: "portrait"
+                }];
+                console.log($scope.items);
+                $scope.hide = function() {
+                    $mdDialog.hide();
+                };
+                $scope.cancel = function() {
+                    $mdDialog.cancel();
+                };
+                $scope.answer = function(answer) {
+                    $mdDialog.hide(answer);
+                };
+            }
+        } else {
+            $mdDialog.show({
+                controller: DialogMediaController,
+                templateUrl: 'views/newMedia.html',
+                parent: angular.element(document.body),
+                targetEvent: ev,
+                clickOutsideToClose: true,
+                fullscreen: useFullScreen,
+            });
+            $scope.$watch(function() {
+                return $mdMedia('xs');
+            }, function(wantsFullScreen) {
+                $scope.customFullscreen = (wantsFullScreen === true);
+            });
+
+            function DialogMediaController($scope, $mdDialog, fileUpload) {
+                $scope.uploadFile = function() {
+                    var file = $scope.myFile;
+                    console.log('file is ');
+                    console.dir(file);
+                    var uploadUrl = "/fileUpload";
+                    fileUpload.uploadFileToUrl(file, "http://www.megafileupload.com/");
+                };
+                $scope.items = [{
+                    imgNum: 1
+                }, {
+                    imgNum: 2
+                }, {
+                    imgNum: 3
+                }, {
+                    imgNum: 4
+                }, {
+                    imgNum: 5
+                }];
+                $scope.states = [{
+                    abbrev: "landscape"
+                }, {
+                    abbrev: "portrait"
+                }];
+                console.log($scope.items);
+                $scope.hide = function() {
+                    $mdDialog.hide();
+                };
+                $scope.cancel = function() {
+                    $mdDialog.cancel();
+                };
+                $scope.answer = function(answer) {
+                    $mdDialog.hide(answer);
+                };
+            }
+        }
+
+    };
 
     $scope.breadcrumb = $location.path();
     $scope.displayNavigation = function(path) {
@@ -150,6 +190,46 @@ app.run(function($rootScope){
     // event.preventDefault();
   });
   });
+app.config(function($httpProvider){
+  // Here we're adding our interceptor.
+  $httpProvider.interceptors.push('httpInterceptor');
+});
+app.factory('httpInterceptor',['$q','$rootScope',function ($q,$rootScope) {
+      $rootScope.ajaxProgress=0;
+        return {
+            'request': function (config) {
+
+              if(!config  || !(config.customObj) || config.customObj.hideBlockingUi!==true){
+                $rootScope.ajaxProgress++;
+              }
+                
+              //intersept your ajax calls here.
+               return config || $q.when(config);
+            },
+            'response': function(response,config) {
+              if(!(response.config.customObj) || response.config.customObj.hideBlockingUi!==true){
+                $rootScope.ajaxProgress--;
+              }
+              //$rootScope.ajaxProgress--;
+              return response || $q.when(response);
+            },
+              'responseError': function(rejection,config) {
+                try{
+                  if(!(rejection.config.customObj) || rejection.config.customObj.hideBlockingUi!==true){
+                      $rootScope.ajaxProgress--;
+                    }
+                  var error=angular.fromJson(rejection.data);
+                  if(error){
+                    rejection.errorReason=error.error;
+                  }
+                }catch(err){
+                  
+                }
+               
+                  return $q.reject(rejection);
+             }
+        };
+    }]);
 app.directive('datetimez', function() {
     return {
         restrict: 'A',
@@ -159,3 +239,33 @@ app.directive('datetimez', function() {
         }
     };
 });
+app.directive('fileModel', ['$parse', function($parse) {
+        return {
+            restrict: 'A',
+            link: function(scope, element, attrs) {
+                var model = $parse(attrs.fileModel);
+                var modelSetter = model.assign;
+
+                element.bind('change', function() {
+                    scope.$apply(function() {
+                        modelSetter(scope, element[0].files[0]);
+                    });
+                });
+            }
+        };
+    }]);
+
+    app.service('fileUpload', ['$http', function($http) {
+        this.uploadFileToUrl = function(file, uploadUrl) {
+            var fd = new FormData();
+            fd.append('file', file);
+            $http.post(uploadUrl, fd, {
+                    transformRequest: angular.identity,
+                    headers: {
+                        'Content-Type': undefined
+                    }
+                })
+                .success(function() {})
+                .error(function() {});
+        }
+    }]);

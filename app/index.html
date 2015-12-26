@@ -22,7 +22,9 @@
   <!-- endbuild -->
 </head>
 <body style="height:100%;" layout="column">
-  
+ <div class="load-overlay" data-ng-show="$root.ajaxProgress!=0">
+        <img class="load-image" src="/images/ajax-loader.svg"/>
+      </div> 
 <header ng-cloak style="height:100px;">
   <md-toolbar scroll class="app-header" data-ng-controller = "Menuctrl">
     <section layout="row" layout-xs="column" layout-align="left left" layout-wrap>
@@ -42,7 +44,9 @@
 </header>
 
   <md-content md-theme="altTheme" class="main-content" flex>
-    <div ng-view=""></div>
+    <div ng-view="">
+      
+    </div>
   </md-content>
 
   <!-- build:js(.) scripts/vendor.js -->
