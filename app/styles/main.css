@@ -106,7 +106,19 @@ body {
   position: relative;
   top: 40%;
   left: 40%;
-  width: 20%;
+  width: 10%;
+}
+
+.active-theme::before{
+   content: "\f00c";
+    font-family: FontAwesome;
+    position: relative;
+    background: #3F51B5;
+    color: white;
+    padding: 3px;
+}
+.selected-theme{
+    border: 3px solid #3F51B5;
 }
 
 .carddemoBasicUsage .card-media {

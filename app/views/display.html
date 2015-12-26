@@ -15,8 +15,15 @@
             </md-option>
           </md-select>
     </md-input-container>
+    <md-button style="margin-top: 20px;min-width: 50px;" ng-click="display.shuffleView()">
+    <md-icon md-font-icon="fa fa-th-large" style="padding-top: 5px;"></md-icon>
+    </md-button>
+      <md-button style="margin-top: 20px;min-width: 50px;" ng-click="display.mapView()">
+      <md-icon md-font-icon="fa fa-map-o" style="padding-top: 5px;"></md-icon>
+      </md-button>
+ 
   </div>
-    <div flex="20" flex-sm="100" flex-xs="100" layout="column" data-ng-repeat = "item in display.displayData">
+    <div flex="20" flex-sm="100" flex-xs="100" layout="column" data-ng-repeat = "item in display.displayData" ng-if="display.grid">
       <md-card>
       <img src="images/layout_1.png" class="md-card-image" alt="image caption">
         <md-card-title style="padding-top: 13px;padding-bottom: 0px;">
@@ -53,6 +60,9 @@
           
         </div>
       </md-card>
+    </div>
+    <div layout style="width:100%;height:100%;">
+    <div flex="100" id="displayMap" ng-style="{height:display.mapHeight}" ng-if="!display.grid"></div>
     </div>
   </md-content>
 </div>

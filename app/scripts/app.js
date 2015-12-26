@@ -51,6 +51,7 @@ var app = angular
       });
   });
   app.controller('Menuctrl', function ($scope, $location, $mdMedia, $mdDialog) {
+    $scope.state = "display";
     angular.element('.main-menu').click(function () {
     angular.element('.main-menu').removeClass('active');
     angular.element(this).addClass('active');
@@ -62,20 +63,60 @@ var app = angular
         var useFullScreen = ($mdMedia('xs')) && $scope.customFullscreen;
         if ($scope.state == "display") {
             $mdDialog.show({
-                controller: DialogController,
-                templateUrl: 'views/newEvent.html',
                 parent: angular.element(document.body),
+                templateUrl: 'views/newDisplay.html',
                 targetEvent: ev,
                 clickOutsideToClose: true,
                 fullscreen: useFullScreen,
+                controller: DialogController,
+                 onComplete: afterShowAnimation
             });
             $scope.$watch(function() {
                 return $mdMedia('xs');
             }, function(wantsFullScreen) {
                 $scope.customFullscreen = (wantsFullScreen === true);
             });
+            function afterShowAnimation($scope){
+              //Initialize map
+                initmap();
+                 function initmap() {
+                    var marker, map, path, myIcon;
+                    marker = {
+                        "name": 'test', //$window.localStorage.getItem('locationName'),
+                        "lat": '17.3700',
+                        "lng": '78.4800'
+                    };
+                    map = L.map('map', {
+                        attributionControl: false,
+                        center: [marker.lat, marker.lng],
+                        zoom: 5,
+                        zoomControl: false
+                    });
+                    L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6IjZjNmRjNzk3ZmE2MTcwOTEwMGY0MzU3YjUzOWFmNWZhIn0.Y8bhBaUMqFiPrDRW9hieoQ', {
+                        maxZoom: 18,
+                        id: 'mapbox.streets'
+                    }).addTo(map);
+                    L.Icon.Default.imagePath = '/images';
+                    path = L.Icon.Default.imagePath;
+                    if (!path) {
+                        throw new Error("Couldn't autodetect L.Icon.Default.imagePath, set it manually.");
+                    }
+                    myIcon = L.icon({
+                        iconUrl: 'images/iconCurrentLocationGreen.png',
+                        iconSize: [25, 25],
+                        iconAnchor: [15, 20]
+                    });
+                    L.marker([marker.lat, marker.lng], {
+                            icon: myIcon
+                        })
+                        .bindPopup('<a href="#" target="_blank">' + marker.name + '</a>')
+                        .addTo(map);
+                }
+            }
 
             function DialogController($scope, $mdDialog) {
+                //Initialize map
+                // initmap();
                 $scope.items = [{
                     imgNum: 1
                 }, {
@@ -102,6 +143,16 @@ var app = angular
                 $scope.answer = function(answer) {
                     $mdDialog.hide(answer);
                 };
+                $scope.selectTheme=function($event){
+                  console.log("enet");
+                  angular.element('.md-card-image').removeClass('selected-theme');
+                  angular.element('.theme-active').removeClass('active-theme');
+        angular.element($event.target).addClass("selected-theme");
+        angular.element($event.target.parentElement.childNodes[1]).addClass("active-theme");
+                };
+
+               
+
             }
         } else {
             $mdDialog.show({
@@ -157,28 +208,33 @@ var app = angular
 
     };
 
-    $scope.breadcrumb = $location.path();
+    $scope.breadcrumb = 'displays'
     $scope.displayNavigation = function(path) {
-      $scope.breadcrumb = path
-        $location.path('/'+path);
+        $scope.state = "display";
+        $scope.breadcrumb = path
+        $location.path('/' + path);
     };
     $scope.mediaNavigation = function(path) {
-      $scope.breadcrumb = path
-        $location.path('/'+path)
+        $scope.state = "media";
+        $scope.breadcrumb = path
+        $location.path('/' + path)
     };
     $scope.widgetsNavigation = function(path) {
-      $scope.breadcrumb = path
-        $location.path('/'+path)
+        $scope.state = "widget";
+        $scope.breadcrumb = path
+        $location.path('/' + path)
     };
     $scope.campaignsNavigation = function(path) {
-      $scope.breadcrumb = path
-        $location.path('/'+path)
+        $scope.state = "campaign";
+        $scope.breadcrumb = path
+        $location.path('/' + path)
     };
     $scope.schedulerNavigation = function(path) {
-      $scope.breadcrumb = path
-        $location.path('/'+path)
+        $scope.state = "schedule";
+        $scope.breadcrumb = path
+        $location.path('/' + path)
     };
-
+    
   });
 app.run(function($rootScope){
   $rootScope.$on('$routeChangeStart', function(event, nextUrl, currentUrl){

@@ -27,23 +27,23 @@
                             </div>
                             <div flex="33">
                                 <md-input-container style="width:100%;">
-          <md-select ng-model="display.userState" placeholder="Orientation" class="custom-select" >
-            <md-option ng-repeat="state in states" value="{{state.abbrev}}">
-              {{state.abbrev}}
-            </md-option>
-          </md-select>
-    </md-input-container>
+                                    <md-select ng-model="display.userState" placeholder="Orientation" class="custom-select">
+                                        <md-option ng-repeat="state in states" value="{{state.abbrev}}">
+                                            {{state.abbrev}}
+                                        </md-option>
+                                    </md-select>
+                                </md-input-container>
                             </div>
                         </div>
                         <div layout="row">
                             <div flex="33">
                                 <md-input-container style="width:100%;">
-          <md-select ng-model="display.userState" placeholder="Select Group" class="custom-select" >
-            <md-option ng-repeat="state in states" value="{{state.abbrev}}">
-              {{state.abbrev}}
-            </md-option>
-          </md-select>
-    </md-input-container>
+                                    <md-select ng-model="display.userState" placeholder="Select Group" class="custom-select">
+                                        <md-option ng-repeat="state in states" value="{{state.abbrev}}">
+                                            {{state.abbrev}}
+                                        </md-option>
+                                    </md-select>
+                                </md-input-container>
                             </div>
                             <div flex="33">
                                 <md-input-container class="md-block" md-no-float>
@@ -60,14 +60,15 @@
                         </div>
                     </div>
                     <div flex="40">
+                        <div id="map" style="height:150px;margin-top: 10px;margin-left: 10px;">
+                        </div>
                     </div>
                 </div>
                 <div layout="row">
                     <div flex="20" flex-sm="100" flex-xs="100" layout="column" layout-wrap data-ng-repeat="item in items">
                         <md-card>
-                            <!-- <img src="images/layout_1.png" class="md-card-image"></img> -->
-                            <img ng-src={{"images/layout_"+item.imgNum+".png"}} class="md-card-image" style="width: 143px;
-        height: 87px;" alt="image caption">
+                            <div class="theme-active" style="height:0px;"></div>
+                            <img ng-src={{"images/layout_"+item.imgNum+".png"}} class="md-card-image" style="width: 143px;height: 87px;" alt="image caption" ng-click="selectTheme($event)">
                         </md-card>
                     </div>
                 </div>
