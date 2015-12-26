@@ -4,6 +4,7 @@
     <div id='calendar'></div> 
   </div>
   <div flex="20" layout="column" layout-margin >
+  <md-content layout="row" layout-wrap layout-align="center center" layout-xs="column" style="overflow:hidden;border: 1px solid #5484E6;">
   <md-toolbar md-scroll-shrink ng-if="true" class="app-header" style="min-height:10%;margin-bottom:0;z-index:1">
     <div class="md-toolbar-tools select-campaign">
       <h3 flex="90" data-ng-show='!searchCampaign'>
@@ -32,7 +33,8 @@
         Channel 3
     </md-grid-tile>
   </md-grid-list>
-
+</md-content>
+<md-content layout="row" layout-wrap layout-align="center center" layout-xs="column" style="overflow:hidden; border: 1px solid #5484E6";>
     <md-toolbar md-scroll-shrink ng-if="true" class="app-header" style="min-height:10%;margin-bottom:0;z-index:1;">
     <div class="md-toolbar-tools select-campaign">
       <h3 flex="90" data-ng-show='!searchCampaign'>
@@ -45,7 +47,7 @@
     </div>
   </md-toolbar>
   <md-content flex class="list-campaign">
-    <md-list>
+    <md-list style="height:520px;">
       <md-list-item class="md-3-line" ng-repeat="item in todos">
         <img ng-src="{{item.face}}" alt="{{item.who}}" class="md-avatar">
         <div class="md-list-item-text" data-ng-click="addEvent($event)">
@@ -58,6 +60,7 @@
         <md-divider inset></md-divider>
       </md-list-item>
     </md-list>
+  </md-content>
   </md-content>
   </div>
 </md-content>
