@@ -61,7 +61,7 @@ var app = angular
         //code for popup arrival on new button
         // console.log($scope.items);
         var useFullScreen = ($mdMedia('xs')) && $scope.customFullscreen;
-        if ($scope.state == "display") {
+        if ($scope.state === "display") {
             $mdDialog.show({
                 parent: angular.element(document.body),
                 templateUrl: 'views/newDisplay.html',
@@ -76,7 +76,7 @@ var app = angular
             }, function(wantsFullScreen) {
                 $scope.customFullscreen = (wantsFullScreen === true);
             });
-            function afterShowAnimation($scope){
+            function afterShowAnimation(){
               //Initialize map
                 initmap();
                  function initmap() {
@@ -208,31 +208,31 @@ var app = angular
 
     };
 
-    $scope.breadcrumb = 'displays'
+    $scope.breadcrumb = 'displays';
     $scope.displayNavigation = function(path) {
         $scope.state = "display";
-        $scope.breadcrumb = path
+        $scope.breadcrumb = path;
         $location.path('/' + path);
     };
     $scope.mediaNavigation = function(path) {
         $scope.state = "media";
-        $scope.breadcrumb = path
-        $location.path('/' + path)
+        $scope.breadcrumb = path;
+        $location.path('/' + path);
     };
     $scope.widgetsNavigation = function(path) {
         $scope.state = "widget";
-        $scope.breadcrumb = path
-        $location.path('/' + path)
+        $scope.breadcrumb = path;
+        $location.path('/' + path);
     };
     $scope.campaignsNavigation = function(path) {
         $scope.state = "campaign";
-        $scope.breadcrumb = path
-        $location.path('/' + path)
+        $scope.breadcrumb = path;
+        $location.path('/' + path);
     };
     $scope.schedulerNavigation = function(path) {
         $scope.state = "schedule";
-        $scope.breadcrumb = path
-        $location.path('/' + path)
+        $scope.breadcrumb = path;
+        $location.path('/' + path);
     };
     
   });
@@ -323,5 +323,5 @@ app.directive('fileModel', ['$parse', function($parse) {
                 })
                 .success(function() {})
                 .error(function() {});
-        }
+        };
     }]);
