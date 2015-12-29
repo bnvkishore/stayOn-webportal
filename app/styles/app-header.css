@@ -37,7 +37,7 @@ text-align: left;
 
 .main-menu.active {
   background-color: #3667CE;
-  border-bottom : 3px solid #000;
+  border-bottom : 3px solid #1c4aaa;
   border-radius: 0px ;
   margin: 0px;
 }
@@ -57,5 +57,5 @@ text-align: left;
   min-height: 30px;
   line-height: 20px;
   margin: 0px;
-  background-color: #2CCC70;
+  background-color: #2DCC70;
 }

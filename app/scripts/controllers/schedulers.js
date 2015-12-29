@@ -76,7 +76,7 @@ $scope.addEvent = function(ev) {
       schedulerServices.saveSchedule($scope.saveObj).then(function () {
         confirm('success');
         //window.location.reload(true);
-        location.reload(); 
+        // location.reload(); 
       }, function () {
                 alert('failure');
               });

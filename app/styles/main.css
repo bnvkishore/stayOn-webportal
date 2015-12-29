@@ -118,34 +118,33 @@ body {
     padding: 3px;
 }
 .selected-theme{
-    border: 3px solid #3F51B5;
+    border: 2px solid #3F51B5;
 }
 
 .carddemoBasicUsage .card-media {
   background-color: #999999; }
 
  .custom-circle{
-    width: 8px;
-    height: 8px;
+    width: 12px;
+    height: 12px;
     border-radius: 50%;
     background: green;
     position: relative;
-    top: 7px;
+    top: 5px;
   }
   .custom-dot{
-    font-size: 8px;color: #4A9DCE;margin: 1px;
+    font-size: 6px;color:  #5484e8;;margin: 1px;
   }
   .custom-buttton{
-    border-radius: 20px;
-    background: #F9F8F8;
+   background: #ECECEC;
     border: 1px solid #afafaf;
-    margin-left: 20px !important;;
-    padding: 0px;
+    margin-left: 28px !important;
+    padding: 0px 8px;
     min-height: 26px !important;
     line-height: 26px;
     font-size: 12px;
     font-weight: 700;
-    color: #6B6969;
+    color: #323232;
     }
 
  .remove-height .md-errors-spacer{
@@ -180,5 +179,24 @@ body {
   background: #ff8a80; }
 .gridListdemoBasicUsage md-grid-tile {
   transition: all 400ms ease-out 50ms; }
+  .breadcrumb > .active {
+    color: #999999 !important;
+}
 
-  
+md-card.md-default-theme, md-card {
+  border-radius: 0px !important;
+}
+.icon-sel{
+  padding-top: 5px;
+  color:#5385E4;
+  }
+.view-selected{
+  color: #888888 !important;
+    background: #EDEDED;
+    padding: 10px 15px;
+    /* font-size: 20px; */
+    width: 50px !important;
+    height: 35px;
+    border-radius: 4px;
+}
+

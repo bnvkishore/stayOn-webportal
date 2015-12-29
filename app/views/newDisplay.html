@@ -1,4 +1,4 @@
-<md-dialog aria-label="New Display" flex="90" style="max-height:90%;" ng-cloak>
+<md-dialog aria-label="New Display" flex="100" style="height:100%;" ng-cloak>
     <form>
         <md-toolbar>
             <div class="md-toolbar-tools">
@@ -68,7 +68,7 @@
                     <div flex="20" flex-sm="100" flex-xs="100" layout="column" layout-wrap data-ng-repeat="item in items">
                         <md-card>
                             <div class="theme-active" style="height:0px;"></div>
-                            <img ng-src={{"images/layout_"+item.imgNum+".png"}} class="md-card-image" style="width: 143px;height: 87px;" alt="image caption" ng-click="selectTheme($event)">
+                            <img ng-src={{"images/layout_"+item.imgNum+".png"}} class="md-card-image" style="height:105px;" alt="image caption" ng-click="selectTheme($event)">
                         </md-card>
                     </div>
                 </div>
@@ -76,7 +76,7 @@
             </div>
         </md-dialog-content>
     </form>
-    <md-footer style="background-color:#ccc" class="md-medium-tall">
+    <md-footer style="position: absolute;background-color: #ccc;bottom: 0px;width: 100%;" class="md-medium-tall">
         <div layout="row">
             <div flex="60">
                 <md-button ng-click="cancel()">

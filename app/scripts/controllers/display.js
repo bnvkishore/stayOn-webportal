@@ -43,12 +43,16 @@ angular.module('mainApp')
     	Description: 'sample descripton'
     }
     ]
-    vm.shuffleView=function(){
+    vm.shuffleView=function(ev){
         vm.grid=true;
+        angular.element('.icon-sel').removeClass('view-selected');
+         angular.element('.grid-view').addClass('view-selected');
     };
 
-    vm.mapView=function(){
+    vm.mapView=function(ev){
         vm.grid=false;
+        angular.element('.icon-sel').removeClass('view-selected');
+        angular.element('.map-view').addClass('view-selected');
         $timeout(function(){
             var marker, map, path, myIcon;
                     marker = {
