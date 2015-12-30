@@ -8,9 +8,9 @@
   <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
   <!-- build:css(.) styles/vendor.css -->
   <!-- bower:css -->
-  <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
-  <link rel="stylesheet" href="bower_components/angular-material/angular-material.css" />
-  <link rel="stylesheet" href="bower_components/fullcalendar/dist/fullcalendar.css" />
+  <link rel="stylesheet" href="scripts/libs/bootstrap/dist/css/bootstrap.css" />
+  <link rel="stylesheet" href="scripts/libs/angular-material/angular-material.css" />
+  <link rel="stylesheet" href="scripts/libs/fullcalendar/dist/fullcalendar.css" />
   <!-- endbower -->
   <!-- endbuild -->
   <!-- build:css(.tmp) styles/main.css -->
@@ -20,12 +20,30 @@
   <link rel="stylesheet" href="scripts/libs/leaflet/leaflet.css" />
   <link rel="stylesheet" href="styles/main.css" />
   <link rel="stylesheet" href="styles/app-header.css" />
+
+
+  <script src="scripts/libs/jquery/dist/jquery.js"></script>
+  <script src="scripts/libs/angular/angular.js"></script>
+  <script src="scripts/libs/angular-ui-router/release/angular-ui-router.js"></script>
+  <script src="scripts/libs/bootstrap/dist/js/bootstrap.js"></script>
+  <script src="scripts/libs/angular-animate/angular-animate.js"></script>
+  <script src="scripts/libs/angular-cookies/angular-cookies.js"></script>
+  <script src="scripts/libs/angular-resource/angular-resource.js"></script>
+  <script src="scripts/libs/angular-route/angular-route.js"></script>
+  <script src="scripts/libs/angular-sanitize/angular-sanitize.js"></script>
+  <script src="scripts/libs/angular-touch/angular-touch.js"></script>
+  <script src="scripts/libs/angular-aria/angular-aria.js"></script>
+  <script src="scripts/libs/angular-messages/angular-messages.js"></script>
+  <script src="scripts/libs/angular-material/angular-material.js"></script>
+  <script src="scripts/libs/moment/moment.js"></script>
+  <script src="scripts/libs/fullcalendar/dist/fullcalendar.js"></script>
+  <script src="scripts/libs/angular-ui-calendar/src/calendar.js"></script>
   <!-- endbuild -->
 </head>
 
 <body style="height:100%;" layout="column">
  <div class="load-overlay" data-ng-show="$root.ajaxProgress!=0">
-        <img class="load-image" src="/images/ajax-loader.svg"/>
+        <img class="load-image" src="images/ajax-loader.svg"/>
       </div>
 <header ng-cloak style="height:100px;">
   <md-toolbar scroll class="app-header" data-ng-controller = "Menuctrl">
@@ -46,14 +64,12 @@
 </header>
 
   <md-content md-theme="altTheme" class="main-content" flex>
-    <div ng-view="">
-
-    </div>
+    <div ui-view=""></div>
   </md-content>
 
   <!-- build:js(.) scripts/vendor.js -->
   <!-- bower:js -->
-  <script src="bower_components/jquery/dist/jquery.js"></script>
+  <!--<script src="bower_components/jquery/dist/jquery.js"></script>
   <script src="bower_components/angular/angular.js"></script>
   <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
   <script src="bower_components/angular-animate/angular-animate.js"></script>
@@ -67,12 +83,13 @@
   <script src="bower_components/angular-material/angular-material.js"></script>
   <script src="bower_components/moment/moment.js"></script>
   <script src="bower_components/fullcalendar/dist/fullcalendar.js"></script>
-  <script src="bower_components/angular-ui-calendar/src/calendar.js"></script>
+  <script src="bower_components/angular-ui-calendar/src/calendar.js"></script>-->
   <!-- endbower -->
   <!-- endbuild -->
 
       <!-- build:js({.tmp,app}) scripts/scripts.js -->
       <script src="scripts/app.js"></script>
+      <script src="scripts/routes.js"></script>
       <script src="scripts/services/scheduler-service.js"></script>
       <script src="scripts/controllers/display.js"></script>
       <script src="scripts/controllers/media.js"></script>

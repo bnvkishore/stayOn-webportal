@@ -9,48 +9,44 @@
  * Main module of the application.
  */
 var app = angular
-  .module('mainApp', [
-    'ngAnimate',
-    'ngCookies',
-    'ngResource',
-    'ngRoute',
-    'ngSanitize',
-    'ngTouch',
-    'ngMaterial',
-    'ui.calendar'
-  ])
-  .config(function ($routeProvider) {
+  .module('mainApp', ['main']);
+  /*.config(function ($routeProvider) {
     $routeProvider
       .when('/displays', {
-        templateUrl: 'views/display.html',
+
         controller: 'DisplayCtrl',
+        templateUrl: 'display.html',
         controllerAs: 'display'
       })
       .when('/media', {
-        templateUrl: 'views/media.html',
+
         controller: 'MediaCtrl',
+        templateUrl: 'media.html',
         controllerAs: 'media'
       })
       .when('/widgets', {
-        templateUrl: 'views/widgets.html',
+
         controller: 'WidgetsCtrl',
+        templateUrl: 'widgets.html',
         controllerAs: 'widgets'
       })
       .when('/campaigns', {
-        templateUrl: 'views/campaigns.html',
+
         controller: 'CampaignsCtrl',
+        templateUrl: 'campaigns.html',
         controllerAs: 'campaigns'
       })
       .when('/scheduler', {
-        templateUrl: 'views/schedulers.html',
+
         controller: 'SchedulerCtrl',
+        templateUrl: 'schedulers.html',
         controllerAs: 'scheduler'
       })
       .otherwise({
         redirectTo: '/displays'
       });
-  });
-  app.controller('Menuctrl', function ($scope, $location, $mdMedia, $mdDialog) {
+  });*/
+  app.controller('Menuctrl', function ($scope, $state, $mdMedia, $mdDialog) {
     $scope.state = "display";
     angular.element('.main-menu').click(function () {
     angular.element('.main-menu').removeClass('active');
@@ -151,7 +147,7 @@ var app = angular
         angular.element($event.target.parentElement.childNodes[1]).addClass("active-theme");
                 };
 
-               
+
 
             }
         } else {
@@ -212,29 +208,29 @@ var app = angular
     $scope.displayNavigation = function(path) {
         $scope.state = "display";
         $scope.breadcrumb = path;
-        $location.path('/' + path);
+        $state.go(path);
     };
     $scope.mediaNavigation = function(path) {
         $scope.state = "media";
         $scope.breadcrumb = path;
-        $location.path('/' + path);
+      $state.go(path);
     };
     $scope.widgetsNavigation = function(path) {
         $scope.state = "widget";
         $scope.breadcrumb = path;
-        $location.path('/' + path);
+      $state.go(path);
     };
     $scope.campaignsNavigation = function(path) {
         $scope.state = "campaign";
         $scope.breadcrumb = path;
-        $location.path('/' + path);
+      $state.go(path);
     };
     $scope.schedulerNavigation = function(path) {
         $scope.state = "schedule";
         $scope.breadcrumb = path;
-        $location.path('/' + path);
+      $state.go(path);
     };
-    
+
   });
 app.run(function($rootScope){
   $rootScope.$on('$routeChangeStart', function(event, nextUrl, currentUrl){
@@ -258,7 +254,7 @@ app.factory('httpInterceptor',['$q','$rootScope',function ($q,$rootScope) {
               if(!config  || !(config.customObj) || config.customObj.hideBlockingUi!==true){
                 $rootScope.ajaxProgress++;
               }
-                
+
               //intersept your ajax calls here.
                return config || $q.when(config);
             },
@@ -279,9 +275,9 @@ app.factory('httpInterceptor',['$q','$rootScope',function ($q,$rootScope) {
                     rejection.errorReason=error.error;
                   }
                 }catch(err){
-                  
+
                 }
-               
+
                   return $q.reject(rejection);
              }
         };
