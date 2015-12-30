@@ -19,17 +19,17 @@
       <md-button style="margin-top: 20px;min-width: 50px;padding:0px;" ng-click="display.mapView($event)">
       <md-icon md-font-icon="fa fa-map-o" style="" class="icon-sel map-view"></md-icon>
       </md-button>
- 
+
   </div>
-    <div flex="20" flex-sm="100" flex-xs="100" layout="column" data-ng-repeat = "item in display.displayData" ng-if="display.grid">
+    <div flex="20" flex-sm="100" flex-xs="100" layout="column" data-ng-repeat = "item in display.displayData track by $index" ng-if="display.grid" style="padding:8px;">
       <md-card>
       <img src="images/layout_1.png" class="md-card-image" alt="image caption" />
         <md-card-title style="padding-top: 13px;padding-bottom: 0px;">
             <span class="custom-circle"></span>
-            <span class="md-subhead" style="margin-left:9px;color: #5583E5;font-size: 18px;overflow: hidden; white-space: nowrap;text-overflow: ellipsis;">{{item.title}}</span>
+            <span class="md-subhead" style="margin-left:9px;color: #5583E5;font-size: 18px;overflow: hidden; white-space: nowrap;text-overflow: ellipsis;">{{item.display_name}}</span>
         </md-card-title>
         <md-card-actions layout="row" layout-align="start center">
-          <label class="custom-buttton">Action 1</label>
+          <label class="custom-buttton">{{item.group}}</label>
         </md-card-actions>
         <div layout="row" style="border-top:1px solid #E6E6E6;margin-top:5px;">
           <div flex="40" style="text-align:center;display:inline;border-right: 1px solid #E6E6E6;padding-top: 8px;">
@@ -55,7 +55,7 @@
              <md-menu-item><md-button ng-click="doSomething()">History</md-button></md-menu-item>
            </md-menu-content>
           </md-menu>
-          
+
         </div>
       </md-card>
     </div>

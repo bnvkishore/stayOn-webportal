@@ -8,7 +8,7 @@
  * Controller of the mainApp
  */
 angular.module('mainApp')
-  .controller('DisplayCtrl', function ($timeout) {
+  .controller('DisplayCtrl', function ($timeout,$http,$scope) {
     this.awesomeThings = [
       'HTML5 Boilerplate',
       'AngularJS',
@@ -17,7 +17,16 @@ angular.module('mainApp')
 
     var vm = this;
     vm.grid=true;
-    vm.displayData = [
+    var request = $http.get('http://52.90.114.255:3000/display/list/displays').then(function (response) {
+      $scope.data = response;
+      return response; // this will be `data` in the next chained .then() functions
+    });
+
+    request.then(function (response){
+      vm.displayData = response.data;
+      console.log(vm.displayData);
+    })
+    /*vm.displayData = [
     {
     	title: 'Display Card one',
     	Description: 'sample descripton'
@@ -42,7 +51,7 @@ angular.module('mainApp')
     	title: 'Display Card six',
     	Description: 'sample descripton'
     }
-    ]
+    ]*/
     vm.shuffleView=function(ev){
         vm.grid=true;
         angular.element('.icon-sel').removeClass('view-selected');
@@ -87,7 +96,7 @@ angular.module('mainApp')
                         .bindPopup('<a href="#" target="_blank">' + marker.name + '</a>')
                         .addTo(map);
         },0);
-         
+
     };
     vm.mapHeight=window.innerHeight-250;
     vm.state="sort by";
@@ -96,5 +105,5 @@ angular.module('mainApp')
      },{
          abbrev:"descending"
      }]
-     
+
   });

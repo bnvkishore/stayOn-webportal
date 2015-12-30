@@ -1,6 +1,6 @@
 
  <div ng-cloak style="height:100%;">
- 
+
 
   <md-content class="md-padding" layout="row" layout-wrap layout-align="left start" layout-xs="column">
   <div flex="100" layout="row" style="height:100%;" layout-align="end start">
@@ -16,7 +16,7 @@
           </md-select>
     </md-input-container>
   </div>
-    <div flex="20" flex-sm="100" flex-xs="100" layout="column" data-ng-repeat = "item in media.mediaData">
+    <div flex="20" flex-sm="100" flex-xs="100" layout="column" data-ng-repeat = "item in media.mediaData" style="padding:8px;">
       <md-card>
       <img src="images/layout_1.png" class="md-card-image" alt="image caption" />
         <md-card-title style="padding-top: 13px;padding-bottom: 0px;">
@@ -50,7 +50,7 @@
              <md-menu-item><md-button ng-click="doSomething()">History</md-button></md-menu-item>
            </md-menu-content>
           </md-menu>
-          
+
         </div>
       </md-card>
     </div>
